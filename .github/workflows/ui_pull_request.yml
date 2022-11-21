@@ -22,6 +22,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
+          cache-dependency-path: ./apps/ui/yarn.lock
 
       - name: Install dependencies
         working-directory: ./apps/ui
