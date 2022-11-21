@@ -1,0 +1,36 @@
+name: ci apps/ui
+
+on:
+  pull_request:
+    branches: main
+    paths:
+      - 'apps/ui/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: "18.x"
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Use Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Install dependencies ( node ${{ matrix.node-version }} )
+        cache: "yarn"
+        run: yarn --frozen-lockfile
+
+      - name: Build application
+        run: yarn build
+
+      - name: Run static chacking
+        run: yarn lint --quiet
+
+      - name: Run tests
+        run: yarn test
