@@ -13,7 +13,7 @@ describe('teste de exemplo', () => {
     it('deve somar números fracionados', () => {
       expect(sum(6 / 2, 2.2)).toEqual(5.2)
     })
-    it('deve somar números fracionados 2', () => {
+    it('deve somar números fracionados 2 ', () => {
       expect(sum(0.1, 0.2)).toEqual(0.3)
     })
   })
