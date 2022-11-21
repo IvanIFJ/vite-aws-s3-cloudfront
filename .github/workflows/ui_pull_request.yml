@@ -21,13 +21,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: "yarn"
 
       - name: Install dependencies
         working-directory: ./apps/ui
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
-        with:
-          cache: "yarn"
 
       - name: Build application
         working-directory: ./apps/ui
