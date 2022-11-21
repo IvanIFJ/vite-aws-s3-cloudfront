@@ -7,7 +7,7 @@ on:
       - "apps/ui/**"
 
 jobs:
-  build:
+  ui_pull_request:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,21 +17,26 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v3
 
-      - name: Use Node
+      - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies ( node ${{ matrix.node-version }} )
-        with:
           cache: "yarn"
+          cache-dependency-path: ./apps/ui/yarn.lock
+
+      - name: Install dependencies
+        working-directory: ./apps/ui
+        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
 
       - name: Build application
+        working-directory: ./apps/ui
         run: yarn build
 
       - name: Run static chacking
+        working-directory: ./apps/ui
         run: yarn lint --quiet
 
       - name: Run tests
+        working-directory: ./apps/ui
         run: yarn test
