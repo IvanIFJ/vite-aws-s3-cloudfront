@@ -7,7 +7,7 @@ on:
       - "apps/ui/**"
 
 jobs:
-  build:
+  ui_pull_request:
     runs-on: ubuntu-latest
     strategy:
       matrix:
