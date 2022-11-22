@@ -16,7 +16,7 @@ function App() {
         </a>
       </div>
       <h1>Testing aws + github actions</h1>
-      <p>trigger build 2</p>
+      <p>trigger build 3</p>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
