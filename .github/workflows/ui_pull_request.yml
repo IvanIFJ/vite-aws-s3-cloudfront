@@ -1,4 +1,4 @@
-name: ci apps/ui
+name: ci pull_request apps/ui
 
 on:
   pull_request:
