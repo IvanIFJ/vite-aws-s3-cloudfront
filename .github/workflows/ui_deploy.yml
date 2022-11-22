@@ -1,9 +1,8 @@
 name: ci deploy apps/ui
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    branches: [main]
     paths:
       - "apps/ui/**"
 
