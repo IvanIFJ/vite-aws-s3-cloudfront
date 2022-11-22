@@ -1,42 +1,42 @@
-name: ci pull_request apps/ui
+# name: ci pull_request apps/ui
 
-on:
-  pull_request:
-    branches: [main]
-    paths:
-      - "apps/ui/**"
+# on:
+#   pull_request:
+#     branches: [main]
+#     paths:
+#       - "apps/ui/**"
 
-jobs:
-  ui_pull_request:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
+# jobs:
+#   ui_pull_request:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [18.x]
 
-    steps:
-      - name: Clone repository
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Clone repository
+#         uses: actions/checkout@v3
 
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "yarn"
-          cache-dependency-path: ./apps/ui/yarn.lock
+#       - name: Setup Node ${{ matrix.node-version }}
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: "yarn"
+#           cache-dependency-path: ./apps/ui/yarn.lock
 
-      - name: Install dependencies
-        working-directory: ./apps/ui
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn --frozen-lockfile
+#       - name: Install dependencies
+#         working-directory: ./apps/ui
+#         if: steps.cache.outputs.cache-hit != 'true'
+#         run: yarn --frozen-lockfile
 
-      - name: Build application
-        working-directory: ./apps/ui
-        run: yarn build
+#       - name: Build application
+#         working-directory: ./apps/ui
+#         run: yarn build
 
-      - name: Run static chacking
-        working-directory: ./apps/ui
-        run: yarn lint --quiet
+#       - name: Run static chacking
+#         working-directory: ./apps/ui
+#         run: yarn lint --quiet
 
-      - name: Run tests
-        working-directory: ./apps/ui
-        run: yarn test
+#       - name: Run tests
+#         working-directory: ./apps/ui
+#         run: yarn test
