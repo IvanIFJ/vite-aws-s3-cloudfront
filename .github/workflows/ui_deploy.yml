@@ -3,8 +3,6 @@ name: ci deploy apps/ui
 on:
   pull_request:
     branches: [main]
-    paths:
-      - "apps/ui/**"
 
 jobs:
   ui_deploy:
